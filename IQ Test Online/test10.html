@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 10 - IT Fundamentals</title>
+    <script src="timer.js"></script>
+    <script>
+        function submitTest() {
+            const correctAnswers = [1, 2, 3, 1, 0, 2, 3, 1, 2, 0];
+            let score = 0;
+
+            correctAnswers.forEach((answer, index) => {
+                const questionDiv = document.querySelector(`div[data-question="${index}"]`);
+                const selectedOption = document.querySelector(`input[name="question_${index}"]:checked`);
+
+                if (selectedOption) {
+                    if (parseInt(selectedOption.value) === answer) {
+                        score++;
+                        selectedOption.parentElement.classList.add("correct");
+                    } else {
+                        selectedOption.parentElement.classList.add("incorrect");
+                    }
+                }
+
+                // Highlight the correct answer
+                const correctOption = document.querySelector(`input[name="question_${index}"][value="${answer}"]`);
+                if (correctOption) {
+                    correctOption.parentElement.classList.add("answer-key");
+                }
+            });
+
+            // Update leaderboard
+            const username = sessionStorage.getItem('loggedInUser') || 'Guest';
+            let leaderboard = JSON.parse(localStorage.getItem('leaderboardData')) || [];
+            leaderboard.push({ username, score });
+            localStorage.setItem('leaderboardData', JSON.stringify(leaderboard));
+
+            // Display summary
+            const summaryContainer = document.createElement("div");
+            summaryContainer.className = "summary-container";
+            summaryContainer.innerHTML = `
+                <h2>Quiz Summary</h2>
+                <p>Your Score: ${score}/${correctAnswers.length}</p>
+                <button onclick="location.reload()">Try Again</button>
+                <button onclick="window.location.href='leaderboard.html'">View Leaderboard</button>
+            `;
+            document.body.appendChild(summaryContainer);
+        }
+    </script>
+    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="timer.css">
+    <style>
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .answer-key {
+            background-color: #cce5ff;
+            color: #004085;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .summary-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .summary-container h2 {
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .summary-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .summary-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Test 10 - IT Fundamentals</h1>
+    </header>
+    <div id="timer">03:00</div>
+    <main>
+        <form onsubmit="submitTest(); return false;">
+            <div data-question="0">
+                <p>1. Which of the following is a type of software that manages hardware resources?</p>
+                <label><input type="radio" name="question_0" value="0">Application software</label><br>
+                <label><input type="radio" name="question_0" value="1">Operating System</label><br>
+                <label><input type="radio" name="question_0" value="2">Utility Software</label><br>
+                <label><input type="radio" name="question_0" value="3">Firmware</label><br>
+            </div>
+
+            <div data-question="1">
+                <p>2. What is the purpose of DNS (Domain Name System)?</p>
+                <label><input type="radio" name="question_1" value="0">Encrypt data over the internet</label><br>
+                <label><input type="radio" name="question_1" value="1">Route emails to the correct server</label><br>
+                <label><input type="radio" name="question_1" value="2">Translate domain names to IP addresses</label><br>
+                <label><input type="radio" name="question_1" value="3">Manage security on networks</label><br>
+            </div>
+
+            <div data-question="2">
+                <p>3. Which of the following is an example of an input device?</p>
+                <label><input type="radio" name="question_2" value="0">Monitor</label><br>
+                <label><input type="radio" name="question_2" value="1">Printer</label><br>
+                <label><input type="radio" name="question_2" value="2">Keyboard</label><br>
+                <label><input type="radio" name="question_2" value="3">Speakers</label><br>
+            </div>
+
+            <div data-question="3">
+                <p>4. Which protocol is used for secure communication over the internet?</p>
+                <label><input type="radio" name="question_3" value="0">HTTP</label><br>
+                <label><input type="radio" name="question_3" value="1">HTTPS</label><br>
+                <label><input type="radio" name="question_3" value="2">FTP</label><br>
+                <label><input type="radio" name="question_3" value="3">IMAP</label><br>
+            </div>
+
+            <div data-question="4">
+                <p>5. Which of the following is a type of database model?</p>
+                <label><input type="radio" name="question_4" value="0">Relational</label><br>
+                <label><input type="radio" name="question_4" value="1">Function</label><br>
+                <label><input type="radio" name="question_4" value="2">Element</label><br>
+                <label><input type="radio" name="question_4" value="3">Hierarchical</label><br>
+            </div>
+
+            <div data-question="5">
+                <p>6. What is the primary function of an IP address?</p>
+                <label><input type="radio" name="question_5" value="0">To identify a user’s location</label><br>
+                <label><input type="radio" name="question_5" value="1">To secure a network</label><br>
+                <label><input type="radio" name="question_5" value="2">To identify a device on a network</label><br>
+                <label><input type="radio" name="question_5" value="3">To encrypt data over a network</label><br>
+            </div>
+
+            <div data-question="6">
+                <p>7. Which of the following is NOT an example of cloud computing service?</p>
+                <label><input type="radio" name="question_6" value="0">Google Drive</label><br>
+                <label><input type="radio" name="question_6" value="1">Microsoft Office</label><br>
+                <label><input type="radio" name="question_6" value="2">Amazon Web Services (AWS)</label><br>
+                <label><input type="radio" name="question_6" value="3">Adobe Photoshop</label><br>
+            </div>
+
+            <div data-question="7">
+                <p>8. What is the primary purpose of a firewall in a network?</p>
+                <label><input type="radio" name="question_7" value="0">Increase bandwidth</label><br>
+                <label><input type="radio" name="question_7" value="1">Block unauthorized access</label><br>
+                <label><input type="radio" name="question_7" value="2">Accelerate data transmission</label><br>
+                <label><input type="radio" name="question_7" value="3">Create network addresses</label><br>
+            </div>
+
+            <div data-question="8">
+                <p>9. Which of the following is used to identify the source of an attack on a network?</p>
+                <label><input type="radio" name="question_8" value="0">Antivirus software</label><br>
+                <label><input type="radio" name="question_8" value="1">Intrusion Detection System (IDS)</label><br>
+                <label><input type="radio" name="question_8" value="2">Firewall</label><br>
+                <label><input type="radio" name="question_8" value="3">Proxy server</label><br>
+            </div>
+
+            <div data-question="9">
+                <p>10. What does the acronym 'URL' stand for?</p>
+                <label><input type="radio" name="question_9" value="0">Uniform Resource Locator</label><br>
+                <label><input type="radio" name="question_9" value="1">Uniform Resource Link</label><br>
+                <label><input type="radio" name="question_9" value="2">Universal Resource Locator</label><br>
+                <label><input type="radio" name="question_9" value="3">Universal Reference Locator</label><br>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 IQ Test Online. All rights reserved.</p>
+    </footer>
+</body>
+</html>

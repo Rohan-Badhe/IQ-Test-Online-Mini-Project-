@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <script src="timer.js"></script>
+    <script>
+        function submitTest() {
+            const correctAnswers = [1, 2, 0, 3, 1, 0, 2, 3, 1, 0];
+            let score = 0;
+        
+            correctAnswers.forEach((answer, index) => {
+                const questionDiv = document.querySelector(`div[data-question="${index}"]`);
+                const selectedOption = document.querySelector(`input[name="question_${index}"]:checked`);
+        
+                if (selectedOption) {
+                    if (parseInt(selectedOption.value) === answer) {
+                        score++;
+                        selectedOption.parentElement.classList.add("correct");
+                    } else {
+                        selectedOption.parentElement.classList.add("incorrect");
+                    }
+                }
+        
+                // Highlight the correct answer
+                const correctOption = document.querySelector(`input[name="question_${index}"][value="${answer}"]`);
+                if (correctOption) {
+                    correctOption.parentElement.classList.add("answer-key");
+                }
+            });
+        
+            // Update leaderboard
+            const username = sessionStorage.getItem('loggedInUser') || 'Guest';
+            let leaderboard = JSON.parse(localStorage.getItem('leaderboardData')) || [];
+            leaderboard.push({ username, score });
+            localStorage.setItem('leaderboardData', JSON.stringify(leaderboard));
+        
+            // Display summary
+            const summaryContainer = document.createElement("div");
+            summaryContainer.className = "summary-container";
+            summaryContainer.innerHTML = `
+                <h2>Quiz Summary</h2>
+                <p>Your Score: ${score}/${correctAnswers.length}</p>
+                <button onclick="location.reload()">Try Again</button>
+                <button onclick="window.location.href='leaderboard.html'">View Leaderboard</button>
+            `;
+            document.body.appendChild(summaryContainer);
+        }
+        
+    </script>
+    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="timer.css">
+    <style>
+        /* Highlight for correct answers */
+        .correct {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Dark green */
+            font-weight: bold;
+        }
+
+        /* Highlight for incorrect answers */
+        .incorrect {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24; /* Dark red */
+            font-weight: bold;
+        }
+
+        /* Highlight for the answer key */
+        .answer-key {
+            background-color: #cce5ff; /* Light blue */
+            color: #004085; /* Dark blue */
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Summary container styling */
+        .summary-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa; /* Light gray */
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .summary-container h2 {
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .summary-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .summary-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Test Page</h1>
+    </header>
+    <div id="timer">03:00</div>
+    <main>
+        <form onsubmit="submitTest(); return false;">
+            <div data-question="0">
+                <p>1. What is 2 + 2?</p>
+                <label><input type="radio" name="question_0" value="0"> A. 3</label><br>
+                <label><input type="radio" name="question_0" value="1"> B. 4</label><br>
+                <label><input type="radio" name="question_0" value="2"> C. 5</label><br>
+                <label><input type="radio" name="question_0" value="3"> D. 6</label>
+            </div>
+
+            <div data-question="1">
+                <p>2. What is the capital of France?</p>
+                <label><input type="radio" name="question_1" value="0"> A. Berlin</label><br>
+                <label><input type="radio" name="question_1" value="1"> B. Madrid</label><br>
+                <label><input type="radio" name="question_1" value="2"> C. Paris</label><br>
+                <label><input type="radio" name="question_1" value="3"> D. London</label>
+            </div>
+
+            <div data-question="2">
+                <p>3. Which planet is known as the Red Planet?</p>
+                <label><input type="radio" name="question_2" value="0"> A. Mars</label><br>
+                <label><input type="radio" name="question_2" value="1"> B. Venus</label><br>
+                <label><input type="radio" name="question_2" value="2"> C. Jupiter</label><br>
+                <label><input type="radio" name="question_2" value="3"> D. Saturn</label>
+            </div>
+
+            <div data-question="3">
+                <p>4. What is the largest ocean on Earth?</p>
+                <label><input type="radio" name="question_3" value="0"> A. Atlantic Ocean</label><br>
+                <label><input type="radio" name="question_3" value="1"> B. Indian Ocean</label><br>
+                <label><input type="radio" name="question_3" value="2"> C. Arctic Ocean</label><br>
+                <label><input type="radio" name="question_3" value="3"> D. Pacific Ocean</label>
+            </div>
+
+            <div data-question="4">
+                <p>5. What is the square root of 16?</p>
+                <label><input type="radio" name="question_4" value="0"> A. 3</label><br>
+                <label><input type="radio" name="question_4" value="1"> B. 4</label><br>
+                <label><input type="radio" name="question_4" value="2"> C. 5</label><br>
+                <label><input type="radio" name="question_4" value="3"> D. 6</label>
+            </div>
+
+            <div data-question="5">
+                <p>6. What is the chemical symbol for water?</p>
+                <label><input type="radio" name="question_5" value="0"> A. H2O</label><br>
+                <label><input type="radio" name="question_5" value="1"> B. O2</label><br>
+                <label><input type="radio" name="question_5" value="2"> C. CO2</label><br>
+                <label><input type="radio" name="question_5" value="3"> D. HO2</label>
+            </div>
+
+            <div data-question="6">
+                <p>7. How many continents are there on Earth?</p>
+                <label><input type="radio" name="question_6" value="0"> A. 5</label><br>
+                <label><input type="radio" name="question_6" value="1"> B. 6</label><br>
+                <label><input type="radio" name="question_6" value="2"> C. 7</label><br>
+                <label><input type="radio" name="question_6" value="3"> D. 8</label>
+            </div>
+
+            <div data-question="7">
+                <p>8. What is the speed of light?</p>
+                <label><input type="radio" name="question_7" value="0"> A. 300 km/s</label><br>
+                <label><input type="radio" name="question_7" value="1"> B. 3,000 km/s</label><br>
+                <label><input type="radio" name="question_7" value="2"> C. 30,000 km/s</label><br>
+                <label><input type="radio" name="question_7" value="3"> D. 300,000 km/s</label>
+            </div>
+
+            <div data-question="8">
+                <p>9. Which animal is known as the King of the Jungle?</p>
+                <label><input type="radio" name="question_8" value="0"> A. Elephant</label><br>
+                <label><input type="radio" name="question_8" value="1"> B. Lion</label><br>
+                <label><input type="radio" name="question_8" value="2"> C. Tiger</label><br>
+                <label><input type="radio" name="question_8" value="3"> D. Leopard</label>
+            </div>
+
+            <div data-question="9">
+                <p>10. What is 10 + 10?</p>
+                <label><input type="radio" name="question_9" value="0"> A. 20</label><br>
+                <label><input type="radio" name="question_9" value="1"> B. 30</label><br>
+                <label><input type="radio" name="question_9" value="2"> C. 40</label><br>
+                <label><input type="radio" name="question_9" value="3"> D. 50</label>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 IQ Test Online. All rights reserved.</p>
+    </footer>
+</body>
+</html>

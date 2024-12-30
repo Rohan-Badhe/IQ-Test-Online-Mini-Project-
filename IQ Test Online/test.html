@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Reasoning Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles omitted for brevity */
+    </style>
+    <script>
+        let timeLeft = 600; // Timer set for 10 minutes (600 seconds)
+
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+            const interval = setInterval(() => {
+                if (timeLeft > 0) {
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timerElement.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    timeLeft--;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('test-form').submit();
+                }
+            }, 1000);
+        }
+
+        window.onload = startTimer;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Logical Reasoning Test</h1>
+        </div>
+        <div class="timer" id="timer">Time Left: 10:00</div>
+        <form id="test-form" method="POST" action="">
+            <div class="question">
+                <p>1. Example Question</p>
+                <ul class="options">
+                    <li><label><input type="radio" name="answer_0" value="0" required>Option 1</label></li>
+                    <li><label><input type="radio" name="answer_0" value="1">Option 2</label></li>
+                </ul>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
