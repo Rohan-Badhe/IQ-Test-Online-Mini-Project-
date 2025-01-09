@@ -76,9 +76,106 @@ button[type="submit"]:hover {
     background: linear-gradient(to right, #01579b, #0288d1);
     transform: scale(1.05);
 }
+/* Stylish Submit Button */
+.styled-submit {
+    padding: 12px 24px;
+    margin: 20px auto;
+    background: linear-gradient(to right, #0288d1, #81d4fa); /* Matching gradient */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.styled-submit:hover {
+    background: linear-gradient(to right, #01579b, #0288d1); /* Darker hover effect */
+    transform: scale(1.05);
+}
+
+.styled-submit:active {
+    background: linear-gradient(to right, #01456f, #01579b); /* Even darker on click */
+    transform: scale(1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Footer styling */
 footer p {
     margin: 20px 0;
     color: #333;
+}
+
+.correct {
+    background-color: #d4edda; /* Light green */
+    color: #155724; /* Dark green */
+    font-weight: bold;
+}
+
+.incorrect {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24; /* Dark red */
+    font-weight: bold;
+}
+
+.answer-key {
+    background-color: #cce5ff; /* Light blue */
+    color: #004085; /* Dark blue */
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.summary-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light gray */
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.summary-container button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.summary-container button:hover {
+    background-color: #0056b3;
+}
+
+.styled-submit {
+    padding: 12px 24px;
+    margin: 20px auto;
+    background: linear-gradient(to right, #0288d1, #81d4fa);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.styled-submit:hover {
+    background: linear-gradient(to right, #01579b, #0288d1);
+    transform: scale(1.05);
+}
+
+.styled-submit:active {
+    background: linear-gradient(to right, #01456f, #01579b);
+    transform: scale(1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
