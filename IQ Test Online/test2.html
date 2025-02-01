@@ -77,18 +77,11 @@
                 }
             });
 
-            // Get the username or prompt for one if not found
-            let username = localStorage.getItem('loggedInUser');
-            if (!username) {
-                username = prompt("Enter your username to save your score:") || "Guest"; // Default to "Guest" if no input
-                localStorage.setItem('loggedInUser', username); // Save username for future use
-            }
-
             // Update leaderboard
-            const leaderboardData = JSON.parse(localStorage.getItem('leaderboardData')) || [];
-            leaderboardData.push({ username, score });
-            localStorage.setItem('leaderboardData', JSON.stringify(leaderboardData));
-
+            const username = sessionStorage.getItem('loggedInUser') || 'Guest';
+            let leaderboard = JSON.parse(localStorage.getItem('leaderboardData')) || [];
+            leaderboard.push({ username, score });
+            localStorage.setItem('leaderboardData', JSON.stringify(leaderboard));
             // Display the score summary
             const summaryContainer = document.createElement("div");
             summaryContainer.className = "summary-container";

@@ -78,11 +78,10 @@
             });
 
             // Update leaderboard
-            const username = localStorage.getItem('loggedInUser') || 'Guest';
-            const leaderboardData = JSON.parse(localStorage.getItem('leaderboardData')) || [];
-            leaderboardData.push({ username, score });
-            localStorage.setItem('leaderboardData', JSON.stringify(leaderboardData));
-
+            const username = sessionStorage.getItem('loggedInUser') || 'Guest';
+            let leaderboard = JSON.parse(localStorage.getItem('leaderboardData')) || [];
+            leaderboard.push({ username, score });
+            localStorage.setItem('leaderboardData', JSON.stringify(leaderboard));
             // Display the score summary
             const summaryContainer = document.createElement("div");
             summaryContainer.className = "summary-container";
