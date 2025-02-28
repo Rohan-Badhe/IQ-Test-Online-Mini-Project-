@@ -22,6 +22,8 @@ This project is a simple web-based platform designed for online IQ testing. It a
 - **User-friendly Interface**: Easy to navigate and use.
 - **Random Question Generation**: Each test consists of randomly generated questions.
 - **Real-time Scoring**: Immediate feedback on test completion.
+
+
 - **Score Tracking**: View and track your performance over time.
 
 
@@ -29,6 +31,9 @@ This project is a simple web-based platform designed for online IQ testing. It a
 - **HTML**: Structure of the web pages.
 - **CSS**: Styling and layout.
 - **JavaScript**: Interactivity and logic implementation.
+
+- - visit site :
+- https://iq-test-online-mini-project-jmxb.vercel.app/
 
 ## Installation
 To run this project locally, follow these steps:
